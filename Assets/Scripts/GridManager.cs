@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GridManager : MonoBehaviour
 {
+    public GameObject[,] grid;
     public int ancho, alto;
-    public TilePrefab tilePrefab;
+    public float spacing = 1;
+    public GameObject tile;
+    public Transform player;
+    public Vector3 offset = new Vector3(0, 1, 0);
+    public Vector2 actualposPlayer;
     public Transform _camera;
 
-    [SerializeField]
-    public Dictionary<Vector3, TilePrefab> tiles;
 
     private void Start()
     {
@@ -18,26 +22,23 @@ public class GridManager : MonoBehaviour
 
     public void GenerateGrid()
     {
-        tiles = new Dictionary<Vector3, TilePrefab>();
-        for (int i = 0; i < ancho; i+=2)
+        grid = new GameObject[ancho, alto];
+        Vector3 startPos = transform.position;
+        for (int i = 0; i < ancho; i++)
         {
-            for(int j = 0; j < alto; j+=2)
+            for(int j = 0; j < alto; j++)
             {
-                var spawnedTile = Instantiate(tilePrefab, new Vector3(i,0,j), Quaternion.identity);
-                spawnedTile.name = $"Tile {i} {j}";
-
-                tiles[new Vector3(i,0,j)] = spawnedTile;
+                GameObject tiles = Instantiate(tile);
+                startPos = new Vector3(i*spacing,0,j*spacing);
+                tiles.transform.position = startPos;
+                grid[i,j] = tiles;
+                tiles.GetComponent<TilePrefab>().id = new Vector2(i,j);
             }
         }
-        _camera.position = new Vector3((ancho/2)-1, 4, -2);
-    }
-    public TilePrefab GetTileAtPosition(Vector3 position)
-    {
-        if (tiles.TryGetValue(position, out var tile))
-        {
-            return tile;
-        }
-        return null;
+        _camera.position = new Vector3(2, 6, -4);
+        actualposPlayer = new Vector2((ancho - 1) / 2, (alto - 1) / 2);
+        player.transform.DOJump(grid[(int)actualposPlayer.x, (int)actualposPlayer.y].transform.position + offset, 1, 1, .25f);
+        
     }
 
 }

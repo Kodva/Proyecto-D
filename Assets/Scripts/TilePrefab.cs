@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class TilePrefab : MonoBehaviour
 {
+    public Vector2 id;
+    public PlayerMovement player;
 
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        
+        player= FindObjectOfType<PlayerMovement>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            player.isMoving = false;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            player.isMoving = true;
+        }
     }
 }
