@@ -6,8 +6,9 @@ using DG.Tweening;
 public class PlayerMovement : MonoBehaviour
 {
     public GridManager grid;
-    public bool isMoving, isAttacking;
-    public float moveTime = .25f;
+    public bool isMoving;
+    public PlayerPrefs stats;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 grid.actualposPlayer.x -= 1;
-                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x,(int)grid.actualposPlayer.y].transform.position + grid.offset,1,1,moveTime);
+                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x,(int)grid.actualposPlayer.y].transform.position + grid.offset,1,1,stats.speed);
             }
         }
         if (Input.GetKeyDown(KeyCode.D) && isMoving == false)
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 grid.actualposPlayer.x += 1;
-                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, moveTime);
+                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
             }
 
         }
@@ -52,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 grid.actualposPlayer.y -= 1;
-                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, moveTime);
+                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
             }
         }
         if (Input.GetKeyDown(KeyCode.W) && isMoving == false)
@@ -64,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 grid.actualposPlayer.y += 1;
-                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, moveTime);
+                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
             }
         }
     }

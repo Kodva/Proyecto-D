@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField]
     public GameObject[,] grid;
     public int ancho, alto;
     public float spacing = 1;
@@ -17,7 +18,8 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-        GenerateGrid();
+
+
     }
 
     public void GenerateGrid()
