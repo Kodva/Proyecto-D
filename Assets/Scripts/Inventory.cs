@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class First_Dragon : Enemigos
+public class Inventory : MonoBehaviour
 {
-    public GridManager grid;
-    public Image lifebar;
 
+    public List<Items> items;
     // Start is called before the first frame update
     void Start()
     {
-        maxHP = 100;
-        currentHP = maxHP;
+        items = new List<Items>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        lifebar.fillAmount = lifebar.fillAmount % maxHP;
+        
     }
 }
