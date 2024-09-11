@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public GridManager grid;
     public bool isMoving;
     public PlayerPrefs stats;
+    public First_Dragon xd;
     
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        xd = FindObjectOfType<First_Dragon>();
 
         if (Input.GetKeyDown(KeyCode.A) && isMoving== false)
         {
@@ -67,6 +69,10 @@ public class PlayerMovement : MonoBehaviour
                 grid.actualposPlayer.y += 1;
                 transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            xd.FirstAttack();
         }
     }
     private void OnCollisionEnter(Collision collision)

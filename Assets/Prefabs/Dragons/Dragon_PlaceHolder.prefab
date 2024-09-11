@@ -154,6 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb0e69d278052348b3210409e7c3e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
+  playerStats: {fileID: 0}
+  tiles: {fileID: 0}
+  normalMat: {fileID: 0}
+  atkMat: {fileID: 2100000, guid: 85405213c7b308940bf664a53f2d3693, type: 2}
 --- !u!114 &6205801829857374873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,9 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
-  lifebar: {fileID: 0}
-  lifebarEase: {fileID: 0}
-  learpSpeed: 0.05
   maxHP: 0
   currentHP: 0
   defense: 4

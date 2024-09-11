@@ -22,10 +22,6 @@ public class PlayerAttack : MonoBehaviour
             dragon.currentHP -= (1 + stats.attack)/dragon.defense;
             
         }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GameManager.Instance.StartLevel();
-        }
         
     }
 
