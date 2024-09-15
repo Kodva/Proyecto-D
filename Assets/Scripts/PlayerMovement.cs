@@ -72,7 +72,15 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            xd.FirstAttack();
+            StartCoroutine(xd.LeftAttack());
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            StartCoroutine(xd.RightAttack());
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(xd.RockAttack());
         }
     }
     private void OnCollisionEnter(Collision collision)

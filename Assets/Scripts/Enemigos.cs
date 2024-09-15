@@ -12,6 +12,7 @@ public class Enemigos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        grid = FindObjectOfType<GridManager>();
         defense = (Random.Range(3, 8) * GameManager.Instance.level) / 2;
         
     }

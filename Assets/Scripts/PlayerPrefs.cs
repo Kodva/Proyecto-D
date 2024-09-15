@@ -10,6 +10,7 @@ public class PlayerPrefs : MonoBehaviour
     public float attack;
     public float defense;
     public float speed;
+    public float gold;
     // Start is called before the first frame update
     void Start()
     {
