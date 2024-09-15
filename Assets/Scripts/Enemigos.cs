@@ -9,6 +9,7 @@ public class Enemigos : MonoBehaviour
     public float maxHP;
     public float currentHP;
     public float defense;
+    public int damageMultiplier;
     // Start is called before the first frame update
     void Start()
     {

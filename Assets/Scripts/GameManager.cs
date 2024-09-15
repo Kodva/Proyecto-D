@@ -49,10 +49,7 @@ public class GameManager : MonoBehaviour
         playerMov.isMoving = false;
         yield return new WaitForSeconds(.5f);
         hud.lifebarEase.maxValue = enemigos.maxHP;
-        yield return new WaitForSeconds(1.5f);
         hud.lifebar.maxValue = enemigos.maxHP;
-
-
     }
 
     // Update is called once per frame

@@ -160,6 +160,7 @@ MonoBehaviour:
   maxHP: 0
   currentHP: 0
   defense: 0
+  damageMultiplier: 1
 --- !u!114 &3440838306803277018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,11 +178,20 @@ MonoBehaviour:
   tiles: []
   tileSelected: {fileID: 0}
   rock: {fileID: 2088960952643296078, guid: 7d4a91664f748194aa74475f8acd77d9, type: 3}
+  rockSelected: {fileID: 0}
   spawnRocks_L: {fileID: 6335001261693860389}
   spawnRocks_R: {fileID: 7491673027842716828}
   normalMat: {fileID: 0}
   atkMat: {fileID: 2100000, guid: 85405213c7b308940bf664a53f2d3693, type: 2}
+  pj: []
+  frenesi: 0
+  timerAttack: 0
   offset: {x: 0, y: 1, z: 0}
+  secondOffset: {x: 0.5, y: 0, z: 0.5}
+  attackSelected: 0
+  playerGround:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &3105791481449640704
 GameObject:
   m_ObjectHideFlags: 0

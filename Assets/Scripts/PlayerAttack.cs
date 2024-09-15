@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     public PlayerPrefs stats;
     public PlayerMovement mov;
     public Enemigos dragon;
+    public Rock rock;
 
     // Start is called before the first frame update
     void Start()
@@ -17,12 +18,24 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J) && mov.isMoving ==false)
+        float distance = 1.8f;
+        RaycastHit hit;
+        Ray atk_ray = new Ray(transform.position, transform.forward);
+        Debug.DrawRay(atk_ray.origin,atk_ray.direction * distance);
+        if (Input.GetKeyDown(KeyCode.J) && !mov.isMoving)
         {
-            dragon.currentHP -= (1 + stats.attack)/dragon.defense;
-            
+            if(Physics.Raycast(atk_ray, out hit, distance))
+            {
+                if (hit.collider.CompareTag("Rock"))
+                {
+                    rock = hit.collider.GetComponent<Rock>();
+                    rock.hp_rock -= (1 + stats.attack) * stats.attackRockMultiplier;
+                }
+            }
+            if(!Physics.Raycast(atk_ray, out hit, distance))
+            {
+                dragon.currentHP -= (1 + stats.attack) / dragon.defense;
+            }
         }
-        
     }
-
 }

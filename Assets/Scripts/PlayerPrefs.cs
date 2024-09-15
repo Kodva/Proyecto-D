@@ -11,6 +11,8 @@ public class PlayerPrefs : MonoBehaviour
     public float defense;
     public float speed;
     public float gold;
+    public float goldMultiplier;
+    public float attackRockMultiplier;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,10 @@ public class PlayerPrefs : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        currentHP -= 1 * damage;
     }
 }
