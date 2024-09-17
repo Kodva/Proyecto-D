@@ -22,20 +22,16 @@ public class PlayerAttack : MonoBehaviour
         RaycastHit hit;
         Ray atk_ray = new Ray(transform.position, transform.forward);
         Debug.DrawRay(atk_ray.origin,atk_ray.direction * distance);
-        if (Input.GetKeyDown(KeyCode.J) && !mov.isMoving)
+        //Physics.Raycast(atk_ray, out hit, distance);
+        //rock = hit.collider.GetComponent<Rock>();
+        if (Input.GetKeyDown(KeyCode.J) && !mov.isMoving && !Physics.Raycast(atk_ray, out hit, distance))
         {
-            if(Physics.Raycast(atk_ray, out hit, distance))
+            if (rock != null)
             {
-                if (hit.collider.CompareTag("Rock"))
-                {
-                    rock = hit.collider.GetComponent<Rock>();
-                    rock.hp_rock -= (1 + stats.attack) * stats.attackRockMultiplier;
-                }
+                rock.hp_rock -= (1 + stats.attack) * stats.attackRockMultiplier;
             }
-            if(!Physics.Raycast(atk_ray, out hit, distance))
-            {
+            else
                 dragon.currentHP -= (1 + stats.attack) / dragon.defense;
-            }
         }
     }
 }

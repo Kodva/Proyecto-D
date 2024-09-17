@@ -22,7 +22,12 @@ public class PlayerPrefs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentHP <= 0)
+        {
+            GameManager.Instance.isGaming = false;
+            GameManager.Instance.StartCoroutine(GameManager.Instance.DeathPlayer());
+        }
+
     }
 
     public void ReceiveDamage(int damage)

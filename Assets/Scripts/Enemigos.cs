@@ -17,5 +17,18 @@ public class Enemigos : MonoBehaviour
         defense = (Random.Range(3, 8) * GameManager.Instance.level) / 2;
         
     }
-    
+
+    public void Update()
+    {
+        if (GameManager.Instance.isGaming)
+        {
+            if (currentHP <= 0)
+            {
+                GameManager.Instance.isGaming = false;
+                GameManager.Instance.StartCoroutine(GameManager.Instance.FinishLevel());
+                GameManager.Instance.isUpgrading = true;
+            }
+        }
+    }
+
 }

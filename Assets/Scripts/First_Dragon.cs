@@ -24,7 +24,6 @@ public class First_Dragon : MonoBehaviour
     private int length;
     public int attackSelected;
     public LayerMask playerGround;
-    // Start is called before the first frame update
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
