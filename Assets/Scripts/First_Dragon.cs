@@ -127,7 +127,7 @@ public class First_Dragon : MonoBehaviour
 
     public void SelectTimer()
     {
-        timerAttack = Random.Range(2,4.5f);
+        timerAttack = Random.Range(1,2.5f);
     }
     public  IEnumerator RockAttack()
     {

@@ -1961,7 +1961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -80.29999, y: 0.12269592}
+  m_AnchoredPosition: {x: -80.29999, y: 0.122680664}
   m_SizeDelta: {x: 118.4711, y: 67.4097}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &663689661
@@ -2643,7 +2643,7 @@ MonoBehaviour:
   currentHP: 0
   attack: 5
   defense: 0
-  speed: 0.25
+  speed: 0.5
   gold: 0
   goldMultiplier: 1
   attackRockMultiplier: 1
