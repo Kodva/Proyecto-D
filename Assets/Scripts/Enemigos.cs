@@ -10,12 +10,14 @@ public class Enemigos : MonoBehaviour
     public float currentHP;
     public float defense;
     public int damageMultiplier;
+    public int valor_Dragon;
     // Start is called before the first frame update
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
         defense = (Random.Range(3, 8) * GameManager.Instance.level) / 2;
-        
+        valor_Dragon = (Random.Range(70, 120) * GameManager.Instance.level) / 2;
+
     }
 
     public void Update()
@@ -24,9 +26,7 @@ public class Enemigos : MonoBehaviour
         {
             if (currentHP <= 0)
             {
-                GameManager.Instance.isGaming = false;
-                GameManager.Instance.StartCoroutine(GameManager.Instance.FinishLevel());
-                GameManager.Instance.isUpgrading = true;
+                GameManager.Instance.DeathDragon();
             }
         }
     }

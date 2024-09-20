@@ -18,20 +18,27 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = 1.8f;
-        RaycastHit hit;
-        Ray atk_ray = new Ray(transform.position, transform.forward);
-        Debug.DrawRay(atk_ray.origin,atk_ray.direction * distance);
-        //Physics.Raycast(atk_ray, out hit, distance);
-        //rock = hit.collider.GetComponent<Rock>();
-        if (Input.GetKeyDown(KeyCode.J) && !mov.isMoving && !Physics.Raycast(atk_ray, out hit, distance))
+        if (GameManager.Instance.isGaming)
         {
-            if (rock != null)
+            float distance = 1.8f;
+            RaycastHit hit;
+            Ray atk_ray = new Ray(transform.position, transform.forward);
+            Debug.DrawRay(atk_ray.origin, atk_ray.direction * distance);
+            if (Input.GetKeyDown(KeyCode.J) && !mov.isMoving)
             {
-                rock.hp_rock -= (1 + stats.attack) * stats.attackRockMultiplier;
+                if (Physics.Raycast(atk_ray, out hit, distance))
+                {
+                    if (hit.collider.CompareTag("Rock"))
+                    {
+                        rock = hit.collider.GetComponentInChildren<Rock>();
+                        rock.hp_rock -= (1 + stats.attack) * stats.attackRockMultiplier;
+                    }
+                }
+                if (!Physics.Raycast(atk_ray, out hit, distance))
+                {
+                    dragon.currentHP -= (1 + stats.attack) / dragon.defense;
+                }
             }
-            else
-                dragon.currentHP -= (1 + stats.attack) / dragon.defense;
         }
     }
 }

@@ -54,12 +54,14 @@ public class GameManager : MonoBehaviour
         playerMov.isMoving = false;
         yield return new WaitForSeconds(.5f);
         hud_D.lifebarEase.maxValue = enemigos.maxHP;
+        hud_D.lifebarEase.value = 0;
         yield return new WaitForSeconds(1f);
-        hud_D.lifebarEase.value = Mathf.Lerp(hud_D.lifebarEase.value, enemigos.maxHP, 0.30f);
+        hud_D.lifebarEase.value = Mathf.Lerp(hud_D.lifebarEase.value, enemigos.maxHP, 1f);
         yield return new WaitForSeconds(1f);
         hud_D.lifebar.maxValue = enemigos.maxHP;
+        hud_D.lifebar.value = 0;
         yield return new WaitForSeconds(1f);
-        hud_D.lifebar.value = Mathf.Lerp(hud_D.lifebar.value, enemigos.maxHP, 0.30f);
+        hud_D.lifebar.value = Mathf.Lerp(hud_D.lifebar.value, enemigos.maxHP, 1f);
         yield return new WaitForSeconds(1.5f);
         isGaming = true;
     }
@@ -81,5 +83,13 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(StartLevel());
         }
+    }
+    public void DeathDragon()
+    {
+        isGaming = false;
+        Destroy(dragonBoss);
+        playerAtk.stats.gold += enemigos.valor_Dragon;
+        StartCoroutine(FinishLevel());
+        isUpgrading = true;
     }
 }

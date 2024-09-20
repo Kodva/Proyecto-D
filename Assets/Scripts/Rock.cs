@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rock : MonoBehaviour
 {
     public PlayerPrefs statsplayer;
+    public PlayerAttack pj;
     public float hp_rock;
     public float valor;
 
@@ -12,7 +13,8 @@ public class Rock : MonoBehaviour
     void Start()
     {
         statsplayer = FindObjectOfType<PlayerPrefs>();
-        hp_rock = (15 * GameManager.Instance.level) / 2;
+        pj = FindObjectOfType<PlayerAttack>();
+        hp_rock = (30 * GameManager.Instance.level) / 2;
         valor = ((Random.Range(20,50) * GameManager.Instance.level)/2)* statsplayer.goldMultiplier;
     }
 
@@ -26,6 +28,7 @@ public class Rock : MonoBehaviour
     }
     public void DestroyRock(float coins)
     {
+        pj.rock = null;
         statsplayer.gold += coins;
         Destroy(gameObject);
     }
