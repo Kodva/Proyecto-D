@@ -1,20 +1,36 @@
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
+    public PlayerPrefs player;
     public List<Items> items;
-    // Start is called before the first frame update
     void Start()
     {
-        items = new List<Items>();
+        items = new List<Items>(items);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ItemUps()
     {
-        
+        foreach (var item in items)
+        {
+            if(item.tipoActual == Items.tipo.Uncommon)
+            {
+                player.attack += item.atk;
+                player.currentHP += item.hp;
+                player.goldMultiplier += item.goldMulti;
+                player.gameObject.transform.localScale = player.gameObject.transform.localScale * item.scalePJ;
+            }
+        }
+    }
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ItemUps();
+        }
     }
 }

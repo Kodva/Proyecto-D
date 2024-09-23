@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public PlayerMovement mov;
     public Enemigos dragon;
     public Rock rock;
+    public bool blocking;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,12 @@ public class PlayerAttack : MonoBehaviour
                     dragon.currentHP -= (1 + stats.attack) / dragon.defense;
                 }
             }
+            if ( Input.GetKeyDown(KeyCode.K))
+            {
+                blocking = true;
+            }
+            else blocking = false;
         }
+
     }
 }

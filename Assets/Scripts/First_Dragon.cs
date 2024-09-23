@@ -9,7 +9,9 @@ using System.Linq;
 public class First_Dragon : MonoBehaviour
 {
     public GridManager grid;
+    public PlayerAttack pj_Atk;
     public PlayerPrefs playerStats;
+    public PlayerMovement pj_mov;
     public GameObject[] tiles;
     public GameObject tileSelected;
     public GameObject rock;
@@ -18,6 +20,7 @@ public class First_Dragon : MonoBehaviour
     public Material normalMat, atkMat;
     public Collider[] pj;
     public bool frenesi;
+    public bool isAttacking;
     public float timerAttack;
     public Vector3 offset = new Vector3(0, .25f,0);
     public Vector3 secondOffset = new Vector3(.5f, 0, .5f);
@@ -28,6 +31,8 @@ public class First_Dragon : MonoBehaviour
     {
         grid = FindObjectOfType<GridManager>();
         playerStats = FindObjectOfType<PlayerPrefs>();
+        pj_Atk = FindObjectOfType<PlayerAttack>();
+        pj_mov = FindObjectOfType<PlayerMovement>();
         tiles = new GameObject[length];
         SelectTimer();
     }
@@ -37,7 +42,7 @@ public class First_Dragon : MonoBehaviour
     void Update()
     {
 
-        if (GameManager.Instance.isGaming)
+        if (GameManager.Instance.isGaming && !isAttacking)
         {
             if(timerAttack > 0)
             {
@@ -131,6 +136,7 @@ public class First_Dragon : MonoBehaviour
     }
     public  IEnumerator RockAttack()
     {
+        isAttacking = true;
         tileSelected = grid.grid[Random.Range(0,3), Random.Range(0, 3)];
         yield return new WaitForEndOfFrame();
         if(tileSelected == grid.grid[0,0] || tileSelected == grid.grid[1, 0] || tileSelected == grid.grid[2, 0])
@@ -142,10 +148,12 @@ public class First_Dragon : MonoBehaviour
         rockSelected.transform.DOJump(tileSelected.transform.position + offset, 1.5f, 1, 2);
         yield return new WaitForSeconds(1.8f);
         tileSelected.transform.DOShakePosition(.5f, .25f, 20, 30);
+        isAttacking = false;
     }
 
     public IEnumerator LeftAttack()
     {
+        isAttacking = true;
         length = 3;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -155,7 +163,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[0, 1], 1);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 2);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -175,7 +183,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -188,9 +196,11 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator RightAttack()
     {
+        isAttacking = true;
         length = 3;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -200,7 +210,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[2, 1], 1);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 2);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -220,7 +230,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -233,9 +243,11 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator DiagonalRightAttack()
     {
+        isAttacking = true;
         length = 3;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -245,7 +257,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[1, 1], 1);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[0, 0], 2);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -265,7 +277,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -278,9 +290,11 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator DiagonalLeftAttack()
     {
+        isAttacking = true;
         length = 3;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -290,7 +304,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[1, 1], 1);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[2, 0], 2);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -310,7 +324,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -320,12 +334,15 @@ public class First_Dragon : MonoBehaviour
         {
             Debug.Log("has sido golpeado");
             playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
+
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator AllLeftAttack()
     {
+        isAttacking = true;
         length = 6;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -341,7 +358,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[1, 1], 4);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 0], 5);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -361,7 +378,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -374,9 +391,11 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator AllRightAttack()
     {
+        isAttacking = true;
         length = 6;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -392,7 +411,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[1, 1], 4);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 0], 5);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -412,7 +431,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -425,9 +444,11 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator AllFrontAttack()
     {
+        isAttacking = true;
         length = 6;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -443,7 +464,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[1, 1], 4);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[2, 1], 5);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -463,7 +484,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -476,9 +497,11 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator AllBackAttack()
     {
+        isAttacking = true;
         length = 6;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -494,7 +517,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[2, 0], 4);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[2, 1], 5);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -514,7 +537,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -527,9 +550,11 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
     public IEnumerator AlmostAllAttack()
     {
+        isAttacking = true;
         length = 8;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
@@ -549,7 +574,7 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[2, 1], 6);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[2, 2], 7);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
@@ -569,7 +594,7 @@ public class First_Dragon : MonoBehaviour
         {
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
@@ -582,6 +607,7 @@ public class First_Dragon : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
+        isAttacking = false;
     }
 
 }

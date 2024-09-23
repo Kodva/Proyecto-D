@@ -40,9 +40,10 @@ public class HUD_Upgrades : MonoBehaviour
         {
             if (stats.gold >= valor_Sword)
             {
-                stats.currentHP += 1;
+                stats.attack += 1;
                 valor_Hp = (valor_Hp + 100) / 2;
                 cantidadMejoras--;
+                stats.gold -= valor_Sword;
             }
             else return;
         }
@@ -59,11 +60,13 @@ public class HUD_Upgrades : MonoBehaviour
                     stats.maxHP++;
                     valor_Hp = (valor_Hp + 100) / 2;
                     cantidadMejoras--;
+                    stats.gold -= valor_Hp;
                 }
                 else
                 stats.currentHP += 1;
                 valor_Hp = (valor_Hp + 100) / 2;
                 cantidadMejoras--;
+                stats.gold -= valor_Hp;
             }
             else return;
         }
@@ -73,7 +76,8 @@ public class HUD_Upgrades : MonoBehaviour
     {
         if (cantidadMejoras > 0)
         {
-            switch (number)
+            if (stats.gold >= valor_item)
+                switch (number)
             {
                 case 1:
                 //Elegir item 1

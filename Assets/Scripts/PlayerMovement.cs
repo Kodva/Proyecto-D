@@ -119,10 +119,6 @@ public class PlayerMovement : MonoBehaviour
         #endregion
         #region Inputs for Testing
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(xd.LeftAttack());
-        }
         if (Input.GetKeyDown(KeyCode.I))
         {
             StartCoroutine(xd.RightAttack());
@@ -135,11 +131,23 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
     }
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isMoving = false;
+        }
+        if (collision.gameObject.CompareTag("Rock"))
+        {
+            if (grid.actualposPlayer.y <= 0)
+            {
+                return;
+            }
+            else
+            {
+                grid.actualposPlayer.y -= 1;
+                transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
+            }
         }
     }
     private void OnCollisionExit(Collision collision)
