@@ -11,7 +11,8 @@ public class Enemigos : MonoBehaviour
     public float defense;
     public int damageMultiplier;
     public int valor_Dragon;
-    // Start is called before the first frame update
+    public Animator anim;
+
     void Start()
     {
         grid = FindObjectOfType<GridManager>();

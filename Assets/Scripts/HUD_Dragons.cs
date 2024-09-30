@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class HUD_Dragons : MonoBehaviour
 {
-    public Slider lifebar;
-    public Slider lifebarEase;
+    public Slider lifebar , lifebar_1;
+    public Slider lifebarEase, lifebarEase_1;
     public Enemigos dragon;
     public float lerpSpeed = 0.05f;
     // Start is called before the first frame update
@@ -25,6 +25,14 @@ public class HUD_Dragons : MonoBehaviour
             if (lifebarEase.value != lifebar.value)
             {
                 lifebarEase.value = Mathf.Lerp(lifebarEase.value, dragon.currentHP, lerpSpeed);
+            }
+            if (lifebar_1.value != dragon.currentHP)
+            {
+                lifebar_1.value = dragon.currentHP;
+            }
+            if (lifebarEase_1.value != lifebar_1.value)
+            {
+                lifebarEase_1.value = Mathf.Lerp(lifebarEase_1.value, dragon.currentHP, lerpSpeed);
             }
         }
     }

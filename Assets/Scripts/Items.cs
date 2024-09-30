@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [CreateAssetMenu]
 public class Items : ScriptableObject
@@ -11,6 +13,8 @@ public class Items : ScriptableObject
     public float goldMulti;
     public float scalePJ;
     public tipo tipoActual;
+    public Image portrait;
+    public TextMeshProUGUI itemName;
 
 
     // Start is called before the first frame update
