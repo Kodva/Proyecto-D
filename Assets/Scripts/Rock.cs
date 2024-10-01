@@ -8,7 +8,6 @@ public class Rock : MonoBehaviour
     public PlayerAttack pj;
     public float hp_rock;
     public float valor;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +27,12 @@ public class Rock : MonoBehaviour
     }
     public void DestroyRock(float coins)
     {
+        GameManager.Instance.PlaySound(GameManager.Instance.rockDestroy);
         pj.rock = null;
         statsplayer.gold += coins;
         Destroy(gameObject);
+        GameManager.Instance.PlaySound(GameManager.Instance.oro_Caido);
+        GameManager.Instance.PlaySound(GameManager.Instance.oro_Recolectado);
     }
 
 }

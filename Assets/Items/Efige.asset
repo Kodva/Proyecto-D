@@ -15,5 +15,7 @@ MonoBehaviour:
   atk: 5
   hp: 0
   goldMulti: 0
-  scalePJ: 0.5
+  scalePJ: 1
   tipoActual: 0
+  portrait: {fileID: 0}
+  itemName: {fileID: 0}

@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
     public Animator anim_Dragon;
     public bool isGaming;
     public bool isUpgrading;
+    public AudioSource audioSource;
+    public AudioClip[] pasos;
+    public AudioClip[] atk_Dragon;
+    public AudioClip[] block_pj;
+    public AudioClip[] golpe_Roca;
+    public AudioClip piedra_Woosh, piedra_Impacto, rockDestroy, oro_Caido, oro_Recolectado;
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,7 +34,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
     public IEnumerator StartLevel()
     {
@@ -94,5 +100,9 @@ public class GameManager : MonoBehaviour
         playerAtk.stats.gold += enemigos.valor_Dragon;
         StartCoroutine(FinishLevel());
         isUpgrading = true;
+    }
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

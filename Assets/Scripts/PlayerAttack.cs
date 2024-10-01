@@ -9,7 +9,6 @@ public class PlayerAttack : MonoBehaviour
     public Enemigos dragon;
     public Rock rock;
     public bool blocking;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +30,14 @@ public class PlayerAttack : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Rock"))
                     {
+                        GameManager.Instance.PlaySound(GameManager.Instance.golpe_Roca[Random.Range(0,3)]);
                         rock = hit.collider.GetComponentInChildren<Rock>();
                         rock.hp_rock -= (1 + stats.attack) * stats.attackRockMultiplier;
                     }
                 }
                 if (!Physics.Raycast(atk_ray, out hit, distance))
                 {
+                    GameManager.Instance.PlaySound(GameManager.Instance.atk_Dragon[Random.Range(0, 3)]);
                     dragon.currentHP -= (1 + stats.attack) / dragon.defense;
                 }
             }

@@ -108,22 +108,25 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveLeft()
     {
+        GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.x -= 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
-
     }
     public void MoveRight()
     {
+        GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.x += 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
     }
     public void MoveUp()
     {
+        GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.y += 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
     }
     public void MoveDown()
     {
+        GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.y -= 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
     }

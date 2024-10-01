@@ -138,6 +138,7 @@ public class Third_Dragon : MonoBehaviour
         yield return new WaitForEndOfFrame();
         rockSelected.transform.DOJump(tileSelected.transform.position + offset, 1.5f, 1, 2);
         yield return new WaitForSeconds(1.8f);
+        GameManager.Instance.PlaySound(GameManager.Instance.piedra_Impacto);
         tileSelected.transform.DOShakePosition(.5f, .25f, 20, 30);
         isAttacking = false;
         self.anim.SetTrigger("Idle");
@@ -353,6 +354,7 @@ public class Third_Dragon : MonoBehaviour
                 Debug.Log("has sido golpeado");
                 playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
             }
+            GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
             Debug.Log("Bloqueaste");
         }
         yield return new WaitForSeconds(.8f);
@@ -369,6 +371,7 @@ public class Third_Dragon : MonoBehaviour
                 Debug.Log("has sido golpeado");
                 playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
             }
+            GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
             Debug.Log("Bloqueaste");
         }
         yield return new WaitForSeconds(.8f);
@@ -385,6 +388,7 @@ public class Third_Dragon : MonoBehaviour
                 Debug.Log("has sido golpeado");
                 playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
             }
+            GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
             Debug.Log("Bloqueaste");
         }
         yield return new WaitForSeconds(1f);
