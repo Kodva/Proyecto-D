@@ -80,6 +80,7 @@ MonoBehaviour:
   normalMat: {fileID: 2100000, guid: 1ab82037bb9ef8244b72ececb76c63ce, type: 2}
   atkMat: {fileID: 2100000, guid: 85405213c7b308940bf664a53f2d3693, type: 2}
   pj: []
+  self: {fileID: -3037052639218819074}
   frenesi: 0
   isAttacking: 0
   timerAttack: 0
@@ -162,17 +163,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d2340ce91bd25c34db3a15ab74fbb4fe,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2340ce91bd25c34db3a15ab74fbb4fe,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2340ce91bd25c34db3a15ab74fbb4fe,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2340ce91bd25c34db3a15ab74fbb4fe,
         type: 3}

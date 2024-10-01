@@ -10,6 +10,7 @@ public class HUD_Player : MonoBehaviour
     public PlayerPrefs statsPlayer;
     public TextMeshProUGUI gold_Text;
     public Image PJ_Picture;
+    public Image[] lives;
     // Start is called before the first frame update
     void Start()
     {

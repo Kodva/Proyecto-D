@@ -40,9 +40,10 @@ public class PlayerAttack : MonoBehaviour
                     dragon.currentHP -= (1 + stats.attack) / dragon.defense;
                 }
             }
-            if ( Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKey(KeyCode.K) && !mov.isMoving)
             {
                 blocking = true;
+
             }
             else blocking = false;
         }

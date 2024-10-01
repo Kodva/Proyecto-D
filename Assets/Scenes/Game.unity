@@ -400,6 +400,7 @@ MonoBehaviour:
   statsPlayer: {fileID: 963488030}
   gold_Text: {fileID: 36822464}
   PJ_Picture: {fileID: 1164568495}
+  lives: []
 --- !u!225 &53822049
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2313,7 +2314,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2380,7 +2381,7 @@ Transform:
   m_GameObject: {fileID: 963488023}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0.77, z: -7.02}
+  m_LocalPosition: {x: 2.32, y: 1.958, z: -2.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2426,9 +2427,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 2079384904}
-  isMoving: 0
   stats: {fileID: 963488030}
   xd: {fileID: 0}
+  isMoving: 0
 --- !u!114 &963488030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3271,8 +3272,8 @@ MonoBehaviour:
   enemigos: {fileID: 0}
   playerItems: {fileID: 0}
   dragons:
-  - {fileID: 2327519113716341197, guid: 3870f60112b001643afa73d263567a50, type: 3}
-  - {fileID: 2327519113716341197, guid: 7c8b2abd2adc697419f1f7bb578c2b12, type: 3}
+  - {fileID: 2327519113716341197, guid: 07134def8b24957488363008ab6f5809, type: 3}
+  - {fileID: 2327519113716341197, guid: 07134def8b24957488363008ab6f5809, type: 3}
   - {fileID: 2327519113716341197, guid: 07134def8b24957488363008ab6f5809, type: 3}
   dragonBoss: {fileID: 0}
   spawnPoint: {fileID: 62366629}
@@ -3450,7 +3451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.100006}
+  m_AnchoredPosition: {x: 0, y: 3.0999756}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1240726010
@@ -4800,7 +4801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.100006}
+  m_AnchoredPosition: {x: 0, y: 3.0999756}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1659779105
