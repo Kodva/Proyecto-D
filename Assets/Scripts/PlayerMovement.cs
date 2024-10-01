@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerPrefs stats;
     public First_Dragon xd;
     public bool isMoving;
+    public Animator anim;
 
         #region Inputs for movement
     void Update()
@@ -108,24 +109,36 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveLeft()
     {
+        anim.SetBool("Attack",false);
+        anim.SetBool("Block",false);
+        anim.SetBool("Jump",true);
         GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.x -= 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
     }
     public void MoveRight()
     {
+        anim.SetBool("Attack",false);
+        anim.SetBool("Block",false);
+        anim.SetBool("Jump",true);
         GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.x += 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
     }
     public void MoveUp()
     {
+        anim.SetBool("Attack",false);
+        anim.SetBool("Block",false);
+        anim.SetBool("Jump",true);
         GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.y += 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);
     }
     public void MoveDown()
     {
+        anim.SetBool("Attack",false);
+        anim.SetBool("Block",false);
+        anim.SetBool("Jump", true);
         GameManager.Instance.PlaySound(GameManager.Instance.pasos[Random.Range(0, 3)]);
         grid.actualposPlayer.y -= 1;
         transform.DOJump(grid.grid[(int)grid.actualposPlayer.x, (int)grid.actualposPlayer.y].transform.position + grid.offset, 1, 1, stats.speed);

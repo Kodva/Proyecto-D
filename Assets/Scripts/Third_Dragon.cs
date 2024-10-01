@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Third_Dragon : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Third_Dragon : MonoBehaviour
     public GameObject rockSelected;
     public GameObject spawnRocks_L, spawnRocks_R;
     public Material normalMat, atkMat;
+    public GameObject atkvfx, atkvfxclone, rockvfx;
     public Collider[] pj;
     public Enemigos self;
     public bool frenesi;
@@ -160,6 +162,7 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -170,6 +173,7 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+           
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -211,6 +215,7 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -221,6 +226,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -266,6 +273,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -276,6 +285,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -324,6 +335,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -334,6 +347,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -422,6 +437,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -432,6 +449,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -469,6 +488,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)
@@ -479,6 +500,8 @@ public class Third_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             tile.GetComponentInChildren<Renderer>().material = atkMat;
+            atkvfxclone = Instantiate(atkvfx,tile.transform);
+            Destroy(atkvfxclone,2);
         }
         yield return new WaitForSeconds(.2f);
         foreach (GameObject tile in tiles)

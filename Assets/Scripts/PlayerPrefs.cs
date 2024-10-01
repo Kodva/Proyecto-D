@@ -34,4 +34,7 @@ public class PlayerPrefs : MonoBehaviour
     {
         currentHP -= 1 * damage;
     }
+
+
+    
 }

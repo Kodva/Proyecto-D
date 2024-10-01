@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
-
+using UnityEngine.VFX;
 
 
 public class Second_Dragon : MonoBehaviour
@@ -18,6 +18,7 @@ public class Second_Dragon : MonoBehaviour
     public GameObject rockSelected;
     public GameObject spawnRocks_L, spawnRocks_R;
     public Material normalMat, atkMat;
+    public VisualEffect fire;
     public Collider[] pj;
     public Enemigos self;
     public bool frenesi;
@@ -30,6 +31,7 @@ public class Second_Dragon : MonoBehaviour
     public LayerMask playerGround;
     void Start()
     {
+        fire.Stop();
         grid = FindObjectOfType<GridManager>();
         playerStats = FindObjectOfType<PlayerPrefs>();
         pj_Atk = FindObjectOfType<PlayerAttack>();
@@ -339,6 +341,7 @@ public class Second_Dragon : MonoBehaviour
     }
     public IEnumerator FlameAtk()
     {
+        fire.Play();
         isAttacking = true;
         length = 7;
         yield return new WaitForEndOfFrame();
@@ -357,6 +360,7 @@ public class Second_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[1, 0], 5);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[2, 0], 6);
+        fire.Stop();
         yield return new WaitForEndOfFrame();
         foreach (GameObject tile in tiles)
         {

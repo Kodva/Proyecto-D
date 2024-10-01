@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
-
+using UnityEngine.VFX;
 
 
 public class First_Dragon : MonoBehaviour
@@ -18,6 +18,7 @@ public class First_Dragon : MonoBehaviour
     public GameObject rockSelected;
     public GameObject spawnRocks_L, spawnRocks_R;
     public Material normalMat, atkMat;
+    public VisualEffect fire;
     public Collider[] pj;
     public Enemigos self;
     public bool frenesi;
@@ -36,6 +37,7 @@ public class First_Dragon : MonoBehaviour
         pj_mov = FindObjectOfType<PlayerMovement>();
         tiles = new GameObject[length];
         SelectTimer();
+        fire.Stop();
     }
 
 
@@ -229,6 +231,7 @@ public class First_Dragon : MonoBehaviour
     }
     public IEnumerator AlmostAllAttack()
     {
+        fire.Play();
         isAttacking = true;
         length = 8;
         yield return new WaitForEndOfFrame();
@@ -270,6 +273,7 @@ public class First_Dragon : MonoBehaviour
             tile.GetComponentInChildren<Renderer>().material = normalMat;
         }
         yield return new WaitForSeconds(.5f);
+        fire.Stop();
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);

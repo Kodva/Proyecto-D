@@ -9,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
     public Enemigos dragon;
     public Rock rock;
     public bool blocking;
+
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,9 @@ public class PlayerAttack : MonoBehaviour
             Debug.DrawRay(atk_ray.origin, atk_ray.direction * distance);
             if (Input.GetKeyDown(KeyCode.J) && !mov.isMoving)
             {
+                anim.SetBool("Jump",false);
+                anim.SetBool("Block",false);
+                anim.SetBool("Attack",true);
                 if (Physics.Raycast(atk_ray, out hit, distance))
                 {
                     if (hit.collider.CompareTag("Rock"))
@@ -43,10 +48,18 @@ public class PlayerAttack : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.K) && !mov.isMoving)
             {
+                anim.SetBool("Jump",false);
+                anim.SetBool("Attack",false);
+                anim.SetBool("Block",true);
                 blocking = true;
 
             }
             else blocking = false;
+
+            if (Input.GetKeyUp(KeyCode.K))
+            {
+                anim.SetBool("Block",false);
+            }
         }
 
     }
