@@ -21,7 +21,6 @@ public class Second_Dragon : MonoBehaviour
     public GameObject spawnRocks_L, spawnRocks_R;
     public GameObject atkvfx, atkvfxclone, rockvfx;
     public Material normalMat, atkMat;
-    public VisualEffect bitevfx;
     public Collider[] pj;
     public Enemigos self;
     public bool frenesi;
@@ -36,7 +35,7 @@ public class Second_Dragon : MonoBehaviour
 
     private void Awake()
     {
-        bitevfx.Stop();
+       
     }
 
     void Start()
@@ -361,14 +360,12 @@ public class Second_Dragon : MonoBehaviour
         ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(atkMat, 2);
-        bitevfx.Play();
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
         
 
         yield return new WaitForSeconds(.5f);
         GameManager.Instance.PlaySound(GameManager.Instance.mordida);
-        bitevfx.Stop();
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
