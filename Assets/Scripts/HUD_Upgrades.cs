@@ -30,9 +30,9 @@ public class HUD_Upgrades : MonoBehaviour
         mejoras_Text.text = cantidadMejoras.ToString();
         hp_Text.text = valor_Hp.ToString();
         sword_Text.text = valor_Sword.ToString();
-        item_1_Text.text = valor_item.ToString();
-        item_2_Text.text = valor_item.ToString();
-        item_3_Text.text = valor_item.ToString();
+        //item_1_Text.text = valor_item.ToString();
+        //item_2_Text.text = valor_item.ToString();
+        //item_3_Text.text = valor_item.ToString();
     }
 
     public void UpgradeATK()
@@ -59,11 +59,7 @@ public class HUD_Upgrades : MonoBehaviour
             {
                 if(stats.currentHP == stats.maxHP)
                 {
-                    stats.maxHP++;
-                    valor_Hp = (valor_Hp + 100) / 2;
-                    cantidadMejoras--;
-                    stats.gold -= valor_Hp;
-                    GameManager.Instance.PlaySound(uiSound);
+                    return;
                 }
                 else
                 stats.currentHP += 1;

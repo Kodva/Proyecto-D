@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
             if(item.tipoActual == Items.tipo.Uncommon)
             {
                 player.attack += item.atk;
-                player.currentHP += item.hp;
+                player.currentHP +=  (int) item.hp;
                 player.goldMultiplier += item.goldMulti;
                 player.gameObject.transform.localScale = player.gameObject.transform.localScale * item.scalePJ;
             }

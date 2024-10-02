@@ -423,7 +423,7 @@ public class Second_Dragon : MonoBehaviour
         ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(2.5f);
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);

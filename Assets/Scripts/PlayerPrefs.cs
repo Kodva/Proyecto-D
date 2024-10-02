@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerPrefs : MonoBehaviour
 {
 
-    public float maxHP;
-    public float currentHP;
+    public int maxHP;
+    public int currentHP;
     public float attack;
     public float defense;
     public float speed;
@@ -30,6 +30,10 @@ public class PlayerPrefs : MonoBehaviour
         if (isdeath)
         {
             GameManager.Instance.StartCoroutine(GameManager.Instance.DeathPlayer());
+        }
+        if(currentHP > maxHP)
+        {
+            currentHP = maxHP;
         }
 
     }

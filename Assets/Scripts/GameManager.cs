@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        StartCoroutine(StartLevel());
     }
     public IEnumerator StartLevel()
     {
@@ -45,11 +47,15 @@ public class GameManager : MonoBehaviour
         {
             gridManager.GenerateGrid();
         }
+        hud.ToogleGameoverOff();
         hud_U.SetMejoras();
+        yield return new WaitForSeconds(.1f);
         audioSource.Stop();
         isUpgrading = false;
         yield return new WaitForSeconds(.5f);
         level++;
+        yield return new WaitForSeconds(.1f);
+        playerPrefs.isdeath = false;
         yield return new WaitForSeconds(.5f);
         dragonBoss = Instantiate(dragons[Random.Range(0,dragons.Length)],spawnPoint.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(.5f);
@@ -79,7 +85,52 @@ public class GameManager : MonoBehaviour
         hud_D.lifebar_1.maxValue = enemigos.maxHP;
         yield return new WaitForSeconds(1f);
         isGaming = true;
-        PlaySound(enemigos.self_Music);
+        //PlaySound(enemigos.self_Music);
+    }
+    public IEnumerator RestartLevel()
+    {
+        hud.ToogleGameoverOff();
+        hud_U.SetMejoras();
+        yield return new WaitForSeconds(.1f);
+        audioSource.Stop();
+        isUpgrading = false;
+        yield return new WaitForSeconds(.1f);
+        playerPrefs.currentHP = playerPrefs.maxHP;
+        playerPrefs.isdeath = false;
+        player_anim.SetBool("Death", false);
+        yield return new WaitForSeconds(.1f);
+        Destroy(dragonBoss.gameObject);
+        enemigos = null;
+        yield return new WaitForSeconds(.5f);
+        dragonBoss = Instantiate(dragons[Random.Range(0, dragons.Length)], spawnPoint.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(.5f);
+        enemigos = FindObjectOfType<Enemigos>();
+        PlaySound(enemigos.self_Dragon_Rugido);
+        yield return new WaitForSeconds(.5f);
+        enemigos.maxHP = 100 + (level * 500) / 2;
+        yield return new WaitForSeconds(.5f);
+        enemigos.currentHP = enemigos.maxHP;
+        yield return new WaitForSeconds(1f);
+        hud_D.dragon = dragonBoss.GetComponent<Enemigos>();
+        yield return new WaitForSeconds(.1f);
+        playerAtk.dragon = dragonBoss.GetComponent<Enemigos>();
+        yield return new WaitForSeconds(.1f);
+        playerMov.isMoving = false;
+        yield return new WaitForSeconds(.1f);
+        hud_D.lifebarEase.value = 0.01f;
+        hud_D.lifebarEase.maxValue = enemigos.maxHP;
+        yield return new WaitForSeconds(.1f);
+        hud_D.lifebarEase_1.value = 0.01f;
+        hud_D.lifebarEase_1.maxValue = enemigos.maxHP;
+        yield return new WaitForEndOfFrame();
+        hud_D.lifebar.maxValue = enemigos.maxHP;
+        hud_D.lifebar.value = 0.01f;
+        yield return new WaitForEndOfFrame();
+        hud_D.lifebar_1.value = 0.01f;
+        hud_D.lifebar_1.maxValue = enemigos.maxHP;
+        yield return new WaitForSeconds(1f);
+        isGaming = true;
+        //PlaySound(enemigos.self_Music);
     }
 
     public IEnumerator FinishLevel()
@@ -92,23 +143,24 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator DeathPlayer()
     {
-        audioSource.Stop();
-        GameManager.Instance.isGaming = false;
-        playerPrefs.isdeath = false;
-        yield return new WaitForEndOfFrame();
-        PlaySound(sadMusic);
         player_anim.SetBool("Death", true);
+        GameManager.Instance.isGaming = false;
+        audioSource.Stop();
+        PlaySound(sadMusic);
+        yield return new WaitForEndOfFrame();
+        playerPrefs.isdeath = false;
+        yield return new WaitForSeconds(4.5f);
+        hud.ToogleGameoverON();
         PlaySound(player_dead);
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            StartCoroutine(StartLevel());
-        }
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+            //StartCoroutine(StartLevel());
+        //}
     }
     public IEnumerator DeathDragon()
     {
@@ -116,7 +168,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         PlaySound(dragonBoss.GetComponent<Enemigos>().self_Dragon);
         enemigos.anim.SetTrigger("Death");
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(5f);
         Destroy(dragonBoss);
         playerAtk.stats.gold += enemigos.valor_Dragon;
         StartCoroutine(FinishLevel());
@@ -124,6 +176,6 @@ public class GameManager : MonoBehaviour
     }
     public void PlaySound(AudioClip clip)
     {
-        audioSource.PlayOneShot(clip,.5f);
+        audioSource.PlayOneShot(clip,.25f);
     }
 }
