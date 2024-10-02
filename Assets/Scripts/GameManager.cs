@@ -15,18 +15,20 @@ public class GameManager : MonoBehaviour
     public GameObject spawnPoint;
     public PlayerMovement playerMov;
     public PlayerAttack playerAtk;
+    public PlayerPrefs playerPrefs;
     public HUD_Dragons hud_D;
     public All_HUD hud;
-    public Animator anim_Dragon;
+    public Animator player_anim;
     public bool isGaming;
     public bool isUpgrading;
     public AudioSource audioSource;
     public AudioClip[] pasos;
     public AudioClip[] atk_Dragon;
+    public AudioClip[] atk_pj;
     public AudioClip[] block_pj;
     public AudioClip[] golpe_Roca;
-    public AudioClip piedra_Woosh, piedra_Impacto, rockDestroy, oro_Caido, oro_Recolectado;
-    // Start is called before the first frame update
+    public AudioClip[] dano_Player;
+    public AudioClip piedra_Woosh, piedra_Impacto, rockDestroy, oro_Caido, oro_Recolectado, player_dead, garra, mordida, pisada;
     void Awake()
     {
         Instance = this;
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
         dragonBoss = Instantiate(dragons[Random.Range(0,dragons.Length)],spawnPoint.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(.5f);
         enemigos = FindObjectOfType<Enemigos>();
+        PlaySound(enemigos.self_Dragon_Rugido);
         yield return new WaitForSeconds(.5f);
         enemigos.maxHP = 100 + (level * 500) / 2;
         yield return new WaitForSeconds(.5f);
@@ -82,7 +85,12 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator DeathPlayer()
     {
+        GameManager.Instance.isGaming = false;
+        playerPrefs.isdeath = false;
         yield return new WaitForEndOfFrame();
+        player_anim.SetBool("Death", true);
+        PlaySound(player_dead);
+
     }
 
     // Update is called once per frame
@@ -93,9 +101,13 @@ public class GameManager : MonoBehaviour
             StartCoroutine(StartLevel());
         }
     }
-    public void DeathDragon()
+    public IEnumerator DeathDragon()
     {
         isGaming = false;
+        yield return new WaitForEndOfFrame();
+        PlaySound(dragonBoss.GetComponent<Enemigos>().self_Dragon);
+        enemigos.anim.SetTrigger("Death");
+        yield return new WaitForSeconds(3.5f);
         Destroy(dragonBoss);
         playerAtk.stats.gold += enemigos.valor_Dragon;
         StartCoroutine(FinishLevel());

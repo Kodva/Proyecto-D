@@ -12,6 +12,7 @@ public class Enemigos : MonoBehaviour
     public int damageMultiplier;
     public int valor_Dragon;
     public Animator anim;
+    public AudioClip self_Dragon, self_Dragon_damage, self_Dragon_Rugido;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class Enemigos : MonoBehaviour
         {
             if (currentHP <= 0)
             {
-                GameManager.Instance.DeathDragon();
+                GameManager.Instance.StartCoroutine(GameManager.Instance.DeathDragon());
             }
         }
     }

@@ -11,13 +11,11 @@ public class PlayerAttack : MonoBehaviour
     public bool blocking;
 
     public Animator anim;
-    // Start is called before the first frame update
     void Start()
     {
         dragon = FindObjectOfType<Enemigos>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance.isGaming)
@@ -42,7 +40,9 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (!Physics.Raycast(atk_ray, out hit, distance))
                 {
+                    GameManager.Instance.PlaySound(dragon.self_Dragon_damage);
                     GameManager.Instance.PlaySound(GameManager.Instance.atk_Dragon[Random.Range(0, 3)]);
+                    GameManager.Instance.PlaySound(GameManager.Instance.atk_pj[Random.Range(0, 4)]);
                     dragon.currentHP -= (1 + stats.attack) / dragon.defense;
                 }
             }

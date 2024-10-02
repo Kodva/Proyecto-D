@@ -166,6 +166,9 @@ MonoBehaviour:
   damageMultiplier: 1
   valor_Dragon: 0
   anim: {fileID: 5733224913099917520}
+  self_Dragon: {fileID: 8300000, guid: a36dc4b102b383649b48cb9912f59e0b, type: 3}
+  self_Dragon_damage: {fileID: 8300000, guid: fb7f01ec3377b9642b4ab35458fbc32e, type: 3}
+  self_Dragon_Rugido: {fileID: 8300000, guid: bdf7d8e090b06064ca8bc570947b415a, type: 3}
 --- !u!114 &8792138783014435189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,9 +191,11 @@ MonoBehaviour:
   rockSelected: {fileID: 0}
   spawnRocks_L: {fileID: 6335001261693860389}
   spawnRocks_R: {fileID: 7491673027842716828}
+  atkvfx: {fileID: 207721241184812324, guid: 9755ae4f6f3aa204aac4b9c033a716bf, type: 3}
+  atkvfxclone: {fileID: 0}
+  rockvfx: {fileID: 0}
   normalMat: {fileID: 2100000, guid: 1ab82037bb9ef8244b72ececb76c63ce, type: 2}
   atkMat: {fileID: 2100000, guid: 85405213c7b308940bf664a53f2d3693, type: 2}
-  fire: {fileID: 0}
   pj: []
   self: {fileID: -3037052639218819074}
   frenesi: 0
@@ -202,6 +207,7 @@ MonoBehaviour:
   playerGround:
     serializedVersion: 2
     m_Bits: 64
+  self_Fire: {fileID: 8300000, guid: 00f799bf9a510ae4d93bae27186924dd, type: 3}
 --- !u!1 &6335001261693860389
 GameObject:
   m_ObjectHideFlags: 0

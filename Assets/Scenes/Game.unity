@@ -4452,6 +4452,7 @@ MonoBehaviour:
   gold: 0
   goldMultiplier: 1
   attackRockMultiplier: 1
+  isdeath: 0
 --- !u!114 &963488031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5512,16 +5513,17 @@ MonoBehaviour:
   enemigos: {fileID: 0}
   playerItems: {fileID: 0}
   dragons:
-  - {fileID: 2327519113716341197, guid: 07134def8b24957488363008ab6f5809, type: 3}
-  - {fileID: 2327519113716341197, guid: 07134def8b24957488363008ab6f5809, type: 3}
+  - {fileID: 2327519113716341197, guid: 7c8b2abd2adc697419f1f7bb578c2b12, type: 3}
+  - {fileID: 2327519113716341197, guid: 7c8b2abd2adc697419f1f7bb578c2b12, type: 3}
   - {fileID: 2327519113716341197, guid: 07134def8b24957488363008ab6f5809, type: 3}
   dragonBoss: {fileID: 0}
   spawnPoint: {fileID: 62366629}
   playerMov: {fileID: 963488029}
   playerAtk: {fileID: 963488031}
+  playerPrefs: {fileID: 963488030}
   hud_D: {fileID: 53822047}
   hud: {fileID: 2142202823}
-  anim_Dragon: {fileID: 0}
+  player_anim: {fileID: 5866666021372175917}
   isGaming: 0
   isUpgrading: 0
   audioSource: {fileID: 0}
@@ -5533,6 +5535,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 399ec56f0bb208e42836e654b3d87eb9, type: 3}
   - {fileID: 8300000, guid: d4f9ed7a20ae679448d2f5174479f8d9, type: 3}
   - {fileID: 8300000, guid: 6e4ce9c958abbd0408ece8f2f394f8f1, type: 3}
+  atk_pj:
+  - {fileID: 8300000, guid: 81f5784602119ee42bb04d0f65c24f0f, type: 3}
+  - {fileID: 8300000, guid: cdb504dd52bccb841ac22acdcba30ef3, type: 3}
+  - {fileID: 8300000, guid: e3b7123224936ae4bb0f6685bef645b3, type: 3}
+  - {fileID: 8300000, guid: fa30f76ce8e90c044899ae6de330c073, type: 3}
   block_pj:
   - {fileID: 8300000, guid: ae291ad1321502f4fbcb217bc1a4b49b, type: 3}
   - {fileID: 8300000, guid: 94acb5dbc4729ea4d918798580769e59, type: 3}
@@ -5541,11 +5548,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4b591bf3e125a904ab613be08af1453e, type: 3}
   - {fileID: 8300000, guid: b926f0826b6635a4a8cdb316dcb1df0e, type: 3}
   - {fileID: 8300000, guid: 95205f05314d8dd449ec6f371e7df7fb, type: 3}
+  dano_Player:
+  - {fileID: 8300000, guid: 53824938af259004eb72d1c2eb260f2a, type: 3}
+  - {fileID: 8300000, guid: d7886c58033b31b41a7284612f730e2b, type: 3}
+  - {fileID: 8300000, guid: 9dc39dd6c8df74341929672555b777cc, type: 3}
+  - {fileID: 8300000, guid: dcec9d6b97774eb4da3a9751169617b8, type: 3}
   piedra_Woosh: {fileID: 8300000, guid: 4a8f3dc240334b140aa48aa4eafd8dbb, type: 3}
   piedra_Impacto: {fileID: 8300000, guid: b8188814fbcbfd64db90c428256964d5, type: 3}
   rockDestroy: {fileID: 8300000, guid: 0ba9619900d71f54b99ea621182deec2, type: 3}
   oro_Caido: {fileID: 8300000, guid: 183a37ece700e9a498022379591d4d27, type: 3}
   oro_Recolectado: {fileID: 8300000, guid: 9f9d99be2227b054d97995478d0c77a7, type: 3}
+  player_dead: {fileID: 8300000, guid: 731dca2823ea8d946be02fc16733069b, type: 3}
+  garra: {fileID: 8300000, guid: 35c616e59b383374d829262180188ce4, type: 3}
+  mordida: {fileID: 8300000, guid: 4439a0d42f3129d44898fbab98ac10af, type: 3}
+  pisada: {fileID: 8300000, guid: 28724b1e43390584eb1a44263f6552d8, type: 3}
 --- !u!82 &1205366847
 AudioSource:
   m_ObjectHideFlags: 0

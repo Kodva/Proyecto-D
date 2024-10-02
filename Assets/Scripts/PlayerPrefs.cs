@@ -13,6 +13,7 @@ public class PlayerPrefs : MonoBehaviour
     public float gold;
     public float goldMultiplier;
     public float attackRockMultiplier;
+    public bool isdeath;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,12 @@ public class PlayerPrefs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHP <= 0)
+        if (currentHP <= 0 && GameManager.Instance.isGaming)
         {
-            GameManager.Instance.isGaming = false;
+            isdeath = true;
+        }
+        if (isdeath)
+        {
             GameManager.Instance.StartCoroutine(GameManager.Instance.DeathPlayer());
         }
 
@@ -32,6 +36,7 @@ public class PlayerPrefs : MonoBehaviour
 
     public void ReceiveDamage(int damage)
     {
+        GameManager.Instance.PlaySound(GameManager.Instance.dano_Player[Random.Range(0, 4)]);
         currentHP -= 1 * damage;
     }
 
