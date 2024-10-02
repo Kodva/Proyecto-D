@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine;using UnityEngine.VFX;
 using UnityEngine.VFX;
-
-public class FireAnimation : MonoBehaviour
+public class VFXActivate : MonoBehaviour
 {
-    public ParticleSystem fire;
+    public VisualEffect vfx;
     // Start is called before the first frame update
     void Awake()
     {
-        fire.Stop();
-
-}
+        vfx.Stop();
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,13 +17,13 @@ public class FireAnimation : MonoBehaviour
         
     }
 
-
-   public void FireOn()
+    public void VFXStart()
     {
-        fire.Play();
+        vfx.Play();
     }
-   public void FireOff()
-   {
-       fire.Stop();
-   }
+
+    public void VFXEnd()
+    {
+        vfx.Stop();
+    }
 }

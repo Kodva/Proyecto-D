@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 
 public class Second_Dragon : MonoBehaviour
@@ -19,17 +21,24 @@ public class Second_Dragon : MonoBehaviour
     public GameObject spawnRocks_L, spawnRocks_R;
     public GameObject atkvfx, atkvfxclone, rockvfx;
     public Material normalMat, atkMat;
+    public VisualEffect bitevfx;
     public Collider[] pj;
     public Enemigos self;
     public bool frenesi;
     public bool isAttacking;
     public float timerAttack;
-    public Vector3 offset = new Vector3(0, .25f,0);
+    public Vector3 offset = new Vector3(0, .25f, 0);
     public Vector3 secondOffset = new Vector3(.5f, 0, .5f);
     private int length;
     public int attackSelected;
     public LayerMask playerGround;
     public AudioClip self_Fire;
+
+    private void Awake()
+    {
+        bitevfx.Stop();
+    }
+
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
@@ -47,16 +56,18 @@ public class Second_Dragon : MonoBehaviour
 
         if (GameManager.Instance.isGaming && !isAttacking)
         {
-            if(timerAttack > 0)
+            if (timerAttack > 0)
             {
                 attackSelected = Random.Range(1, 8);
-                timerAttack -= 1* Time.deltaTime;
+                timerAttack -= 1 * Time.deltaTime;
             }
-            if(timerAttack <= 0)
+
+            if (timerAttack <= 0)
             {
                 SelectAttack(attackSelected);
                 SelectTimer();
             }
+
             if (frenesi)
             {
 
@@ -64,15 +75,17 @@ public class Second_Dragon : MonoBehaviour
         }
 
     }
+
     public void SelectAttack(int atk)
     {
         if (atk == 1)
         {
-            self.anim.SetInteger("Ataque",atk);
+            self.anim.SetInteger("Ataque", atk);
             self.anim.SetTrigger("Atk");
             Debug.Log("Roca");
             StartCoroutine(RockAttack());
         }
+
         if (atk == 2)
         {
             self.anim.SetInteger("Ataque", atk);
@@ -80,6 +93,7 @@ public class Second_Dragon : MonoBehaviour
             Debug.Log("Left");
             StartCoroutine(LeftAttack());
         }
+
         if (atk == 3)
         {
             self.anim.SetInteger("Ataque", atk);
@@ -87,6 +101,7 @@ public class Second_Dragon : MonoBehaviour
             Debug.Log("Right");
             StartCoroutine(RightAttack());
         }
+
         if (atk == 4)
         {
             self.anim.SetInteger("Ataque", atk);
@@ -94,6 +109,7 @@ public class Second_Dragon : MonoBehaviour
             Debug.Log("Almost all");
             StartCoroutine(AlmostAllAttack());
         }
+
         if (atk == 5)
         {
             self.anim.SetInteger("Ataque", atk);
@@ -101,6 +117,7 @@ public class Second_Dragon : MonoBehaviour
             Debug.Log("Flame");
             StartCoroutine(FlameAtk());
         }
+
         if (atk == 6)
         {
             self.anim.SetInteger("Ataque", atk);
@@ -108,6 +125,7 @@ public class Second_Dragon : MonoBehaviour
             Debug.Log("Mordisco");
             StartCoroutine(JawFront());
         }
+
         if (atk == 7)
         {
             self.anim.SetInteger("Ataque", atk);
@@ -119,18 +137,20 @@ public class Second_Dragon : MonoBehaviour
 
     public void SelectTimer()
     {
-        timerAttack = Random.Range(1,2.5f);
+        timerAttack = Random.Range(1, 2.5f);
     }
-    public  IEnumerator RockAttack()
+
+    public IEnumerator RockAttack()
     {
         isAttacking = true;
-        tileSelected = grid.grid[Random.Range(0,3), Random.Range(0, 3)];
+        tileSelected = grid.grid[Random.Range(0, 3), Random.Range(0, 3)];
         yield return new WaitForEndOfFrame();
-        if(tileSelected == grid.grid[0,0] || tileSelected == grid.grid[1, 0] || tileSelected == grid.grid[2, 0])
+        if (tileSelected == grid.grid[0, 0] || tileSelected == grid.grid[1, 0] || tileSelected == grid.grid[2, 0])
         {
             tileSelected = grid.grid[Random.Range(1, 3), Random.Range(1, 3)];
         }
-        rockSelected = Instantiate(rock,spawnRocks_L.transform.position, Quaternion.identity);
+
+        rockSelected = Instantiate(rock, spawnRocks_L.transform.position, Quaternion.identity);
         GameManager.Instance.PlaySound(GameManager.Instance.pisada);
         yield return new WaitForEndOfFrame();
         rockSelected.transform.DOJump(tileSelected.transform.position + offset, 1.5f, 1, 2);
@@ -153,6 +173,7 @@ public class Second_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[0, 1], 1);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 2);
+
         void ChangeTilesMaterial(Material material, float vfxDuration)
         {
             foreach (GameObject tile in tiles)
@@ -162,6 +183,7 @@ public class Second_Dragon : MonoBehaviour
                 Destroy(atkvfxclone, vfxDuration);
             }
         }
+
         ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
@@ -174,7 +196,8 @@ public class Second_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
-            Debug.DrawLine(tile.transform.position + offset + secondOffset, tile.transform.position + new Vector3(0, 2f, 0));
+            Debug.DrawLine(tile.transform.position + offset + secondOffset,
+                tile.transform.position + new Vector3(0, 2f, 0));
             foreach (Collider player in pj)
             {
                 if (player == pj_mov.GetComponent<Collider>())
@@ -185,11 +208,13 @@ public class Second_Dragon : MonoBehaviour
                 }
             }
         }
+
         yield return new WaitForSeconds(.5f);
         pj = new Collider[0];
         isAttacking = false;
         self.anim.SetTrigger("Idle");
     }
+
     public IEnumerator RightAttack()
     {
         isAttacking = true;
@@ -203,6 +228,7 @@ public class Second_Dragon : MonoBehaviour
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 2);
         yield return new WaitForEndOfFrame();
+
         void ChangeTilesMaterial(Material material, float vfxDuration)
         {
             foreach (GameObject tile in tiles)
@@ -212,6 +238,7 @@ public class Second_Dragon : MonoBehaviour
                 Destroy(atkvfxclone, vfxDuration);
             }
         }
+
         ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
@@ -221,10 +248,12 @@ public class Second_Dragon : MonoBehaviour
         ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.5f);
         GameManager.Instance.PlaySound(GameManager.Instance.garra);
-        foreach (GameObject tile in tiles)
+    
+    foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
-            Debug.DrawLine(tile.transform.position + offset + secondOffset, tile.transform.position + new Vector3(0, 2f, 0));
+            Debug.DrawLine(tile.transform.position + offset + secondOffset,
+                tile.transform.position + new Vector3(0, 2f, 0));
             foreach (Collider player in pj)
             {
                 if (player == pj_mov.GetComponent<Collider>())
@@ -235,11 +264,13 @@ public class Second_Dragon : MonoBehaviour
                 }
             }
         }
+
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
         isAttacking = false;
         self.anim.SetTrigger("Idle");
     }
+
     public IEnumerator AlmostAllAttack()
     {
         isAttacking = true;
@@ -263,6 +294,7 @@ public class Second_Dragon : MonoBehaviour
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[2, 2], 7);
         yield return new WaitForEndOfFrame();
+
         void ChangeTilesMaterial(Material material, float vfxDuration)
         {
             foreach (GameObject tile in tiles)
@@ -272,6 +304,7 @@ public class Second_Dragon : MonoBehaviour
                 Destroy(atkvfxclone, vfxDuration);
             }
         }
+
         ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
@@ -284,7 +317,8 @@ public class Second_Dragon : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
-            Debug.DrawLine(tile.transform.position + offset + secondOffset, tile.transform.position + new Vector3(0, 2f, 0));
+            Debug.DrawLine(tile.transform.position + offset + secondOffset,
+                tile.transform.position + new Vector3(0, 2f, 0));
             foreach (Collider player in pj)
             {
                 if (player == pj_mov.GetComponent<Collider>())
@@ -295,11 +329,13 @@ public class Second_Dragon : MonoBehaviour
                 }
             }
         }
+
         yield return new WaitForSeconds(1f);
         pj = new Collider[0];
         isAttacking = false;
         self.anim.SetTrigger("Idle");
     }
+
     public IEnumerator JawFront()
     {
         isAttacking = true;
@@ -311,6 +347,7 @@ public class Second_Dragon : MonoBehaviour
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 1);
         yield return new WaitForEndOfFrame();
+
         void ChangeTilesMaterial(Material material, float vfxDuration)
         {
             foreach (GameObject tile in tiles)
@@ -320,15 +357,20 @@ public class Second_Dragon : MonoBehaviour
                 Destroy(atkvfxclone, vfxDuration);
             }
         }
+
         ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(atkMat, 2);
+        bitevfx.Play();
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
-        yield return new WaitForSeconds(.5f);
+        
+
+yield return new WaitForSeconds(.5f);
         GameManager.Instance.PlaySound(GameManager.Instance.mordida);
+        bitevfx.Stop();
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);

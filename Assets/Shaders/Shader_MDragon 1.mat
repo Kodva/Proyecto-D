@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7708058633741655317
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Knight
+  m_Name: Shader_MDragon 1
   m_Shader: {fileID: -6465566751694194690, guid: d0f8ae88abacf194aaf4da63113964af,
     type: 3}
   m_Parent: {fileID: 0}
@@ -55,6 +42,19 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _BottomColor: {r: 0.43792194, g: 0.33597365, b: 0.4716981, a: 0}
-    - _TopColor: {r: 0.20558763, g: 0.17835529, b: 0.2264151, a: 0}
+    - _BottomColor: {r: 0.745283, g: 0.456079, b: 0.13710396, a: 0}
+    - _TopColor: {r: 0.8490566, g: 0.40450338, b: 0.40450338, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &7532975288231538043
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

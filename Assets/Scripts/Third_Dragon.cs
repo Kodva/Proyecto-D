@@ -1,9 +1,11 @@
+using System;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 public class Third_Dragon : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class Third_Dragon : MonoBehaviour
     public GameObject spawnRocks_L, spawnRocks_R;
     public Material normalMat, atkMat;
     public GameObject atkvfx, atkvfxclone, rockvfx;
+    public VisualEffect bitevfx;
     public Collider[] pj;
     public Enemigos self;
     public bool frenesi;
@@ -29,6 +32,12 @@ public class Third_Dragon : MonoBehaviour
     public int attackSelected;
     public LayerMask playerGround;
     public AudioClip alas, self_Fire;
+
+    private void Awake()
+    {
+        bitevfx.Stop();
+    }
+
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
@@ -301,10 +310,12 @@ public class Third_Dragon : MonoBehaviour
         isAttacking = false;
         self.anim.SetTrigger("Idle");
     }
+
     public IEnumerator FlameAtk()
     {
         isAttacking = true;
-        length = 7;
+
+    length = 7;
         yield return new WaitForEndOfFrame();
         tiles = new GameObject[length];
         yield return new WaitForEndOfFrame();
@@ -332,13 +343,16 @@ public class Third_Dragon : MonoBehaviour
             }
         }
         ChangeTilesMaterial(atkMat, 2);
+        bitevfx.Play();
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
         ChangeTilesMaterial(normalMat, 0);
+        
         yield return new WaitForSeconds(.5f);
+        bitevfx.Stop();
         foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
