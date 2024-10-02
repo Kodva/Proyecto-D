@@ -9,7 +9,9 @@ using UnityEngine.SceneManagement;
 public class Menu_Inicio : MonoBehaviour
 {
     public CanvasGroup inicio, opciones;
-    public Button opciones_Button, play_Button, exit_Button, back_Button;
+    public Button play_Button, exit_Button, back_Button;
+    public AudioClip uiSoundM;
+    public AudioSource audioS;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +20,17 @@ public class Menu_Inicio : MonoBehaviour
 
     public void StartGame()
     {
+        audioS.Play();
         SceneManager.LoadScene("Game");
     }
     public void ExitGame()
     {
+        audioS.Play();
         Application.Quit();
     }
     public void EnterOptions()
     {
+        audioS.Play();
         inicio.alpha = 0;
         inicio.interactable = false;
         inicio.blocksRaycasts = false;
@@ -35,6 +40,7 @@ public class Menu_Inicio : MonoBehaviour
     }
     public void ExitOptions()
     {
+        audioS.Play();
         inicio.alpha = 1;
         inicio.interactable = true;
         inicio.blocksRaycasts = true;

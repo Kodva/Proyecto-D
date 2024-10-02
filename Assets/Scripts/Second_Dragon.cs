@@ -248,8 +248,7 @@ public class Second_Dragon : MonoBehaviour
         ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.5f);
         GameManager.Instance.PlaySound(GameManager.Instance.garra);
-    
-    foreach (GameObject tile in tiles)
+        foreach (GameObject tile in tiles)
         {
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
             Debug.DrawLine(tile.transform.position + offset + secondOffset,
@@ -329,7 +328,6 @@ public class Second_Dragon : MonoBehaviour
                 }
             }
         }
-
         yield return new WaitForSeconds(1f);
         pj = new Collider[0];
         isAttacking = false;
@@ -368,7 +366,7 @@ public class Second_Dragon : MonoBehaviour
         ChangeTilesMaterial(normalMat, 0);
         
 
-yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.5f);
         GameManager.Instance.PlaySound(GameManager.Instance.mordida);
         bitevfx.Stop();
         foreach (GameObject tile in tiles)
@@ -468,8 +466,11 @@ yield return new WaitForSeconds(.5f);
                         Debug.Log("has sido golpeado");
                         playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
                     }
-                    GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
-                    Debug.Log("Bloqueaste");
+                    if (pj_Atk.blocking)
+                    {
+                        GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
+                        Debug.Log("Bloqueaste");
+                    }
                     break;
                 }
             }
@@ -490,8 +491,11 @@ yield return new WaitForSeconds(.5f);
                         Debug.Log("has sido golpeado");
                         playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
                     }
-                    GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
-                    Debug.Log("Bloqueaste");
+                    if (pj_Atk.blocking)
+                    {
+                        GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
+                        Debug.Log("Bloqueaste");
+                    }
                     break;
                 }
             }

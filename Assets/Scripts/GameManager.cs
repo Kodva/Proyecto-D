@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public PlayerPrefs playerPrefs;
     public HUD_Dragons hud_D;
     public All_HUD hud;
+    public HUD_Upgrades hud_U;
     public Animator player_anim;
     public bool isGaming;
     public bool isUpgrading;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     public AudioClip[] block_pj;
     public AudioClip[] golpe_Roca;
     public AudioClip[] dano_Player;
-    public AudioClip piedra_Woosh, piedra_Impacto, rockDestroy, oro_Caido, oro_Recolectado, player_dead, garra, mordida, pisada;
+    public AudioClip piedra_Woosh, piedra_Impacto, rockDestroy, oro_Caido, oro_Recolectado, player_dead, garra, mordida, pisada, sadMusic, winMusic;
     void Awake()
     {
         Instance = this;
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
         {
             gridManager.GenerateGrid();
         }
+        hud_U.SetMejoras();
+        audioSource.Stop();
         isUpgrading = false;
         yield return new WaitForSeconds(.5f);
         level++;
@@ -76,18 +79,24 @@ public class GameManager : MonoBehaviour
         hud_D.lifebar_1.maxValue = enemigos.maxHP;
         yield return new WaitForSeconds(1f);
         isGaming = true;
+        PlaySound(enemigos.self_Music);
     }
 
     public IEnumerator FinishLevel()
     {
         hud.ToogleHUD();
         yield return new WaitForEndOfFrame();
+        audioSource.Stop();
+        yield return new WaitForEndOfFrame();
+        PlaySound(winMusic);
     }
     public IEnumerator DeathPlayer()
     {
+        audioSource.Stop();
         GameManager.Instance.isGaming = false;
         playerPrefs.isdeath = false;
         yield return new WaitForEndOfFrame();
+        PlaySound(sadMusic);
         player_anim.SetBool("Death", true);
         PlaySound(player_dead);
 
@@ -115,6 +124,6 @@ public class GameManager : MonoBehaviour
     }
     public void PlaySound(AudioClip clip)
     {
-        audioSource.PlayOneShot(clip);
+        audioSource.PlayOneShot(clip,.5f);
     }
 }

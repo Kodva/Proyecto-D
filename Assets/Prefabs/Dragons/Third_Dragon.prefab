@@ -59,6 +59,7 @@ MonoBehaviour:
   self_Dragon: {fileID: 8300000, guid: 9d16ed3376f7d4e4d88586bd0964df86, type: 3}
   self_Dragon_damage: {fileID: 8300000, guid: 4e1edc7546983e74b92403a4d21ef4f7, type: 3}
   self_Dragon_Rugido: {fileID: 8300000, guid: d7f6d486130bc944081d5b83792b4ece, type: 3}
+  self_Music: {fileID: 8300000, guid: 85eb8a0888a405d4a8ecf94be87d419f, type: 3}
 --- !u!114 &3490103829032399879
 MonoBehaviour:
   m_ObjectHideFlags: 0

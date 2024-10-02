@@ -392,8 +392,11 @@ public class Third_Dragon : MonoBehaviour
                         Debug.Log("has sido golpeado");
                         playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
                     }
-                    GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
-                    Debug.Log("Bloqueaste");
+                    if (pj_Atk.blocking)
+                    {
+                        GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
+                        Debug.Log("Bloqueaste");
+                    }
                     break;
                 }
             }
@@ -414,8 +417,11 @@ public class Third_Dragon : MonoBehaviour
                         Debug.Log("has sido golpeado");
                         playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
                     }
-                    GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
-                    Debug.Log("Bloqueaste");
+                    if (pj_Atk.blocking)
+                    {
+                        GameManager.Instance.PlaySound(GameManager.Instance.block_pj[Random.Range(0, 3)]);
+                        Debug.Log("Bloqueaste");
+                    }
                     break;
                 }
             }

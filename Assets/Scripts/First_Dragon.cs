@@ -21,7 +21,6 @@ public class First_Dragon : MonoBehaviour
     public GameObject spawnRocks_L, spawnRocks_R;
     public Material normalMat, atkMat;
     public GameObject atkvfx, atkvfxclone;
-    
     public Collider[] pj;
     public Enemigos self;
     public bool frenesi;
@@ -154,39 +153,43 @@ public class First_Dragon : MonoBehaviour
         tiles.SetValue(grid.grid[0, 1], 1);
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 2);
-        yield return new WaitForEndOfFrame();
-        foreach (GameObject tile in tiles)
+
+        void ChangeTilesMaterial(Material material, float vfxDuration)
         {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
-            
+            foreach (GameObject tile in tiles)
+            {
+                tile.GetComponentInChildren<Renderer>().material = material;
+                var atkvfxclone = Instantiate(atkvfx, tile.transform);
+                Destroy(atkvfxclone, vfxDuration);
+            }
         }
+
+        ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-        }
+        ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
-        }
+        ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-        }
+        ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.5f);
+        GameManager.Instance.PlaySound(GameManager.Instance.garra);
         foreach (GameObject tile in tiles)
         {
-            pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
+            pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
+            Debug.DrawLine(tile.transform.position + offset + secondOffset,
+                tile.transform.position + new Vector3(0, 2f, 0));
+            foreach (Collider player in pj)
+            {
+                if (player == pj_mov.GetComponent<Collider>())
+                {
+                    Debug.Log("has sido golpeado");
+                    playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
+                    break;
+                }
+            }
         }
-        yield return new WaitForEndOfFrame();
-        if ( pj.Length > 0)
-        {
-            Debug.Log("has sido golpeado");
-            playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
-        }
-        yield return new WaitForEndOfFrame();
+
+        yield return new WaitForSeconds(.5f);
         pj = new Collider[0];
         isAttacking = false;
         self.anim.SetTrigger("Idle");
@@ -204,36 +207,42 @@ public class First_Dragon : MonoBehaviour
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 2);
         yield return new WaitForEndOfFrame();
-        foreach (GameObject tile in tiles)
+
+        void ChangeTilesMaterial(Material material, float vfxDuration)
         {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
+            foreach (GameObject tile in tiles)
+            {
+                tile.GetComponentInChildren<Renderer>().material = material;
+                var atkvfxclone = Instantiate(atkvfx, tile.transform);
+                Destroy(atkvfxclone, vfxDuration);
+            }
         }
+
+        ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-        }
+        ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
-        }
+        ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-        }
+        ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.5f);
+        GameManager.Instance.PlaySound(GameManager.Instance.garra);
         foreach (GameObject tile in tiles)
         {
-            pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
+            pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
+            Debug.DrawLine(tile.transform.position + offset + secondOffset,
+                tile.transform.position + new Vector3(0, 2f, 0));
+            foreach (Collider player in pj)
+            {
+                if (player == pj_mov.GetComponent<Collider>())
+                {
+                    Debug.Log("has sido golpeado");
+                    playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
+                    break;
+                }
+            }
         }
-        yield return new WaitForEndOfFrame();
-        if (pj.Contains(playerStats.GetComponent<Collider>()))
-        {
-            Debug.Log("has sido golpeado");
-            playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
-        }
+
         yield return new WaitForEndOfFrame();
         pj = new Collider[0];
         isAttacking = false;
@@ -241,7 +250,6 @@ public class First_Dragon : MonoBehaviour
     }
     public IEnumerator AlmostAllAttack()
     {
-        
         isAttacking = true;
         length = 8;
         yield return new WaitForEndOfFrame();
@@ -263,37 +271,42 @@ public class First_Dragon : MonoBehaviour
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[2, 2], 7);
         yield return new WaitForEndOfFrame();
-        foreach (GameObject tile in tiles)
+
+        void ChangeTilesMaterial(Material material, float vfxDuration)
         {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
+            foreach (GameObject tile in tiles)
+            {
+                tile.GetComponentInChildren<Renderer>().material = material;
+                var atkvfxclone = Instantiate(atkvfx, tile.transform);
+                Destroy(atkvfxclone, vfxDuration);
+            }
         }
+
+        ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-        }
+        ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
-        }
+        ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-        }
+        ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.5f);
+        GameManager.Instance.PlaySound(GameManager.Instance.pisada);
         foreach (GameObject tile in tiles)
         {
-            pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, .5f, playerGround);
+            pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
+            Debug.DrawLine(tile.transform.position + offset + secondOffset,
+                tile.transform.position + new Vector3(0, 2f, 0));
+            foreach (Collider player in pj)
+            {
+                if (player == pj_mov.GetComponent<Collider>())
+                {
+                    Debug.Log("has sido golpeado");
+                    playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
+                    break;
+                }
+            }
         }
-        yield return new WaitForEndOfFrame();
-        if (pj.Contains(playerStats.GetComponent<Collider>()))
-        {
-            Debug.Log("has sido golpeado");
-            playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
-        }
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1f);
         pj = new Collider[0];
         isAttacking = false;
         self.anim.SetTrigger("Idle");
@@ -309,38 +322,43 @@ public class First_Dragon : MonoBehaviour
         yield return new WaitForEndOfFrame();
         tiles.SetValue(grid.grid[1, 1], 1);
         yield return new WaitForEndOfFrame();
-        foreach (GameObject tile in tiles)
+
+        void ChangeTilesMaterial(Material material, float vfxDuration)
         {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
+            foreach (GameObject tile in tiles)
+            {
+                tile.GetComponentInChildren<Renderer>().material = material;
+                var atkvfxclone = Instantiate(atkvfx, tile.transform);
+                Destroy(atkvfxclone, vfxDuration);
+            }
         }
+
+        ChangeTilesMaterial(atkMat, 2);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-        }
+        ChangeTilesMaterial(normalMat, 0);
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = atkMat;
-        }
+        ChangeTilesMaterial(atkMat, 2);
+        //bitevfx.Play();
         yield return new WaitForSeconds(.2f);
-        foreach (GameObject tile in tiles)
-        {
-            tile.GetComponentInChildren<Renderer>().material = normalMat;
-          
-        }
+        ChangeTilesMaterial(normalMat, 0);
+
+
         yield return new WaitForSeconds(.5f);
-       
+        GameManager.Instance.PlaySound(GameManager.Instance.mordida);
+        //bitevfx.Stop();
         foreach (GameObject tile in tiles)
         {
-            Debug.Log("buscando objetivo");
             pj = Physics.OverlapSphere(tile.transform.position + offset + secondOffset, 1f, playerGround);
             Debug.DrawLine(tile.transform.position + offset + secondOffset, tile.transform.position + new Vector3(0, 2f, 0));
-        }
-        if (pj.Contains(playerStats.GetComponent<Collider>()))
-        {
-            Debug.Log("has sido golpeado");
-            playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
+            foreach (Collider player in pj)
+            {
+                if (player == pj_mov.GetComponent<Collider>())
+                {
+                    Debug.Log("has sido golpeado");
+                    playerStats.ReceiveDamage(transform.GetComponent<Enemigos>().damageMultiplier);
+                    break;
+                }
+            }
         }
         yield return new WaitForSeconds(.5f);
         pj = new Collider[0];

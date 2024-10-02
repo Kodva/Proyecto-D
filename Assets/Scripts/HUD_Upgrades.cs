@@ -12,6 +12,7 @@ public class HUD_Upgrades : MonoBehaviour
     public TextMeshProUGUI item_1_Text, item_2_Text, item_3_Text,money_Text, mejoras_Text, hp_Text, sword_Text;
     public Image item_1_Image, item_2_Image, item_3_Image;
     public float valor_item, valor_Sword, valor_Hp;
+    public AudioClip uiSound;
 
     void Start()
     {
@@ -40,10 +41,11 @@ public class HUD_Upgrades : MonoBehaviour
         {
             if (stats.gold >= valor_Sword)
             {
-                stats.attack += 1;
-                valor_Hp = (valor_Hp + 100) / 2;
+                stats.attack += 5;
+                valor_Sword = (valor_Sword + 100) / 2;
                 cantidadMejoras--;
                 stats.gold -= valor_Sword;
+                GameManager.Instance.PlaySound(uiSound);
             }
             else return;
         }
@@ -61,12 +63,14 @@ public class HUD_Upgrades : MonoBehaviour
                     valor_Hp = (valor_Hp + 100) / 2;
                     cantidadMejoras--;
                     stats.gold -= valor_Hp;
+                    GameManager.Instance.PlaySound(uiSound);
                 }
                 else
                 stats.currentHP += 1;
                 valor_Hp = (valor_Hp + 100) / 2;
                 cantidadMejoras--;
                 stats.gold -= valor_Hp;
+                GameManager.Instance.PlaySound(uiSound);
             }
             else return;
         }

@@ -392,9 +392,10 @@ MonoBehaviour:
   damageMultiplier: 1
   valor_Dragon: 0
   anim: {fileID: 7367987627399271087}
-  self_Dragon: {fileID: 0}
-  self_Dragon_damage: {fileID: 0}
-  self_Dragon_Rugido: {fileID: 0}
+  self_Dragon: {fileID: 8300000, guid: 5a6e87656c1f9d146bc7754d69ec6a4b, type: 3}
+  self_Dragon_damage: {fileID: 8300000, guid: 62b403660a2406545a62c6966952728b, type: 3}
+  self_Dragon_Rugido: {fileID: 8300000, guid: b387020b46705c742ac723e13f868729, type: 3}
+  self_Music: {fileID: 8300000, guid: 4bcb891e73fd2184cab1c5804a1f8edb, type: 3}
 --- !u!114 &3440838306803277018
 MonoBehaviour:
   m_ObjectHideFlags: 0

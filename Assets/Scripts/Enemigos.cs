@@ -13,6 +13,7 @@ public class Enemigos : MonoBehaviour
     public int valor_Dragon;
     public Animator anim;
     public AudioClip self_Dragon, self_Dragon_damage, self_Dragon_Rugido;
+    public AudioClip self_Music;
 
     void Start()
     {
